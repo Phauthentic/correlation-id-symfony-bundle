@@ -1,0 +1,26 @@
+build:
+    image: default-bionic
+    nodes:
+        analysis:
+            environment:
+                php:
+                    version: 8.3.3
+            project_setup:
+                override:
+                    - 'true'
+            tests:
+                override:
+                    - php-scrutinizer-run
+        php83:
+            environment:
+                php:
+                    version: 8.3.3
+filter:
+    excluded_paths:
+        - 'tests/*'
+checks:
+    php: true
+coding_style:
+    php: {  }
+tools:
+    php_code_coverage: true

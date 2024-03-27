@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phive xmlns="https://phar.io/phive">
+  <phar name="grumphp" version="^2.5.0" installed="2.5.0" location="./tools/grumphp" copy="false"/>
+</phive>

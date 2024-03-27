@@ -1,0 +1,4 @@
+/vendor/
+/tools/
+/bin/
+composer.lock

@@ -1,0 +1,4 @@
+services:
+    Phauthentic\CorrelationIdBundle\EventSubscriber\CorrelationIdSubscriber:
+        tags:
+            - { name: 'kernel.event_subscriber' }
