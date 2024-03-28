@@ -1,6 +1,0 @@
-services:
-    Phauthentic\CorrelationIdBundle\EventSubscriber\CorrelationIdSubscriber:
-        arguments:
-            $config: '%correlation_id%'
-        tags:
-            - { name: 'kernel.event_subscriber' }
