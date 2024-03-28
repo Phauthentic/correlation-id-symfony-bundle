@@ -29,6 +29,26 @@ class CorrelationIdSubscriberTest extends TestCase
         parent::setUp();
     }
 
+    public function testOnKernelRequestConfigWithOtherHeader(): void
+    {
+        $request = new Request();
+        $request->headers->set('X-Correlation-ID', self::CORRELATION_ID);
+
+        $requestEvent = new RequestEvent(
+            $this->createMock(\Symfony\Component\HttpKernel\HttpKernelInterface::class),
+            $request,
+            null
+        );
+
+        $subscriber = new CorrelationIdSubscriber([
+            'request_header_name' => 'CID-IN',
+        ]);
+        $subscriber->onKernelRequest($requestEvent);
+
+        $this->assertNotEmpty($request->attributes->get('CID-IN'));
+        $this->assertSame(self::CORRELATION_ID, $request->attributes->get('CID-IN'));
+    }
+
     public function testOnKernelRequest(): void
     {
         $request = new Request();
@@ -62,6 +82,25 @@ class CorrelationIdSubscriberTest extends TestCase
         $subscriber->onKernelResponse($responseEvent);
 
         $this->assertNotEmpty($response->headers->get('X-Correlation-ID'));
+    }
+
+    public function testOnKernelResponseConfigWithOtherHeader(): void
+    {
+        $response = new Response();
+
+        $responseEvent = new ResponseEvent(
+            $this->createMock(\Symfony\Component\HttpKernel\HttpKernelInterface::class),
+            new Request(),
+            1,
+            $response
+        );
+
+        $subscriber = new CorrelationIdSubscriber([
+            'response_header_name' => 'CID-OUT',
+        ]);
+        $subscriber->onKernelResponse($responseEvent);
+
+        $this->assertNotEmpty($response->headers->get('CID-OUT'));
     }
 
     /**
