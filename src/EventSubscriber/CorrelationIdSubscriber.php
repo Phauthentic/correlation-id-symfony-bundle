@@ -32,8 +32,8 @@ class CorrelationIdSubscriber implements EventSubscriberInterface
             $this->responseHeaderName = (string)$config['response_header_name'];
         }
 
-        if (isset($config['response_header_name'])) {
-            $this->passthrough = (bool)$config['passthrough'];
+        if (isset($config['pass_through'])) {
+            $this->passthrough = (bool)$config['pass_through'];
         }
     }
 

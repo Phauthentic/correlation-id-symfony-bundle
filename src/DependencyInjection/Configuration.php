@@ -13,9 +13,10 @@ class Configuration implements ConfigurationInterface
     {
         $treeBuilder = new TreeBuilder('correlation_id');
 
+        /* @phpstan-ignore-next-line */
         $treeBuilder->getRootNode()
-                ->children()
-                    ->booleanNode('passthrough')
+            ->children()
+                ->booleanNode('pass_through')
                     ->defaultValue(false)
                 ->end()
                 ->scalarNode('response_header_name')

@@ -1,6 +1,9 @@
 services:
     Phauthentic\CorrelationIdBundle\EventSubscriber\CorrelationIdSubscriber:
         arguments:
-            $config: '%correlation_id%'
+            $config:
+                response_header_name: '%correlation_id.response_header_name%'
+                request_header_name: '%correlation_id.request_header_name%'
+                pass_through: '%correlation_id.pass_through%'
         tags:
             - { name: 'kernel.event_subscriber' }
