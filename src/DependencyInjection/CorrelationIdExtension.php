@@ -18,7 +18,18 @@ class CorrelationIdExtension extends Extension
 {
     public function load(array $configs, ContainerBuilder $container): void
     {
-        $yamlLoader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__ . '/../../config'));
+        $configuration = new Configuration();
+        $config = $this->processConfiguration($configuration, $configs);
+
+        $container->setParameter('correlation_id.request_header_name', $config['response_header_name']);
+        $container->setParameter('correlation_id.response_header_name', $config['response_header_name']);
+        $container->setParameter('correlation_id.pass_through', $config['pass_through']);
+
+        $yamlLoader = new Loader\YamlFileLoader(
+            $container,
+            new FileLocator(__DIR__ . '/../../config')
+        );
+
         $yamlLoader->load('services.yaml');
     }
 }

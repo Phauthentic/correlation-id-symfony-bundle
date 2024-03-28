@@ -18,12 +18,35 @@ class CorrelationIdSubscriberTest extends TestCase
 {
     private const CORRELATION_ID = 'd8d089ec-72c8-44c1-a0bf-1906e5fc3524';
 
+    /**
+     * @SuppressWarnings(PHPMD.StaticAccess)
+     */
     public function setUp(): void
     {
         $reflection = new ReflectionClass(CorrelationID::class);
         $reflection->setStaticPropertyValue('value', self::CORRELATION_ID);
 
         parent::setUp();
+    }
+
+    public function testOnKernelRequestConfigWithOtherHeader(): void
+    {
+        $request = new Request();
+        $request->headers->set('X-Correlation-ID', self::CORRELATION_ID);
+
+        $requestEvent = new RequestEvent(
+            $this->createMock(\Symfony\Component\HttpKernel\HttpKernelInterface::class),
+            $request,
+            null
+        );
+
+        $subscriber = new CorrelationIdSubscriber([
+            'request_header_name' => 'CID-IN',
+        ]);
+        $subscriber->onKernelRequest($requestEvent);
+
+        $this->assertNotEmpty($request->attributes->get('CID-IN'));
+        $this->assertSame(self::CORRELATION_ID, $request->attributes->get('CID-IN'));
     }
 
     public function testOnKernelRequest(): void
@@ -61,6 +84,28 @@ class CorrelationIdSubscriberTest extends TestCase
         $this->assertNotEmpty($response->headers->get('X-Correlation-ID'));
     }
 
+    public function testOnKernelResponseConfigWithOtherHeader(): void
+    {
+        $response = new Response();
+
+        $responseEvent = new ResponseEvent(
+            $this->createMock(\Symfony\Component\HttpKernel\HttpKernelInterface::class),
+            new Request(),
+            1,
+            $response
+        );
+
+        $subscriber = new CorrelationIdSubscriber([
+            'response_header_name' => 'CID-OUT',
+        ]);
+        $subscriber->onKernelResponse($responseEvent);
+
+        $this->assertNotEmpty($response->headers->get('CID-OUT'));
+    }
+
+    /**
+     * @SuppressWarnings(PHPMD.StaticAccess)
+     */
     public function testGetSubscribedEvents(): void
     {
         $subscribedEvents = CorrelationIdSubscriber::getSubscribedEvents();

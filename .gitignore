@@ -1,5 +1,6 @@
 /vendor/
 /tools/
 /bin/
+/tmp/
 /.phpunit.cache/
 composer.lock
