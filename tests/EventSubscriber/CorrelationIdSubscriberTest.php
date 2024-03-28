@@ -18,6 +18,9 @@ class CorrelationIdSubscriberTest extends TestCase
 {
     private const CORRELATION_ID = 'd8d089ec-72c8-44c1-a0bf-1906e5fc3524';
 
+    /**
+     * @SuppressWarnings(PHPMD.StaticAccess)
+     */
     public function setUp(): void
     {
         $reflection = new ReflectionClass(CorrelationID::class);
@@ -61,6 +64,9 @@ class CorrelationIdSubscriberTest extends TestCase
         $this->assertNotEmpty($response->headers->get('X-Correlation-ID'));
     }
 
+    /**
+     * @SuppressWarnings(PHPMD.StaticAccess)
+     */
     public function testGetSubscribedEvents(): void
     {
         $subscribedEvents = CorrelationIdSubscriber::getSubscribedEvents();

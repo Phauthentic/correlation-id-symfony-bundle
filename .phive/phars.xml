@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <phive xmlns="https://phar.io/phive">
-  <phar name="grumphp" version="^2.5.0" installed="2.5.0" location="./tools/grumphp" copy="false"/>
+  <phar name="grumphp" version="^2.5.0" installed="2.5.0" location="./bin/grumphp" copy="false"/>
+  <phar name="phpmd" version="^2.15.0" installed="2.15.0" location="./bin/phpmd" copy="false"/>
+  <phar name="phpcs" version="^3.7.1" installed="3.7.1" location="./bin/phpcs" copy="false"/>
+  <phar name="phpstan" version="^1.9.2" installed="1.9.2" location="./bin/phpstan" copy="false"/>
 </phive>

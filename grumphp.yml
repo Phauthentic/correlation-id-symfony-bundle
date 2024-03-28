@@ -1,0 +1,45 @@
+grumphp:
+    ascii:
+        failed: resources/grumphp-grumpy.txt
+        succeeded: resources/grumphp-happy.txt
+    fixer:
+        enabled: true
+        fix_by_default: true
+    tasks:
+        phpstan:
+            autoload_file: ~
+            configuration: phpstan.neon
+            level: null
+            force_patterns: []
+            ignore_patterns: []
+            triggered_by: ['php']
+            memory_limit: "-1"
+            use_grumphp_paths: true
+        phpmd:
+            whitelist_patterns: []
+            exclude: []
+            report_format: text
+            ruleset: ['cleancode', 'codesize', 'naming', 'design', 'unusedcode']
+            triggered_by: ['php']
+        phpcs:
+            standard: []
+            severity: ~
+            error_severity: ~
+            warning_severity: ~
+            tab_width: ~
+            report: full
+            report_width: ~
+            whitelist_patterns: []
+            encoding: ~
+            ignore_patterns: []
+            sniffs: []
+            triggered_by: [php]
+            exclude: []
+            show_sniffs_error_path: true
+        phpunit:
+            config_file: phpunit.xml.dist
+            testsuite: ~
+            group: []
+            exclude_group: []
+            always_execute: false
+            order: null
