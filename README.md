@@ -6,13 +6,13 @@
 [![Code Quality](https://img.shields.io/scrutinizer/g/Phauthentic/correlation-id-symfony-bundle/master.svg?style=for-the-badge)](https://scrutinizer-ci.com/g/Phauthentic/correlation-id-symfony-bundle/)
 <!--[![Scrutinizer Coverage](https://img.shields.io/scrutinizer/coverage/g/Phauthentic/correlation-id-symfony-bundle/master.svg?style=for-the-badge)](https://scrutinizer-ci.com/g/Phauthentic/correlation-id-symfony-bundle/)-->
 
-
 This is a Symfony bridge for the framework agnostic [Correlation ID library](https://github.com/Phauthentic/correlation-id).
 
-> A Correlation ID, also known as a Transit ID, is a unique identifier value that is attached to requests and messages that allow reference to a particular transaction or event chain. The Correlation Pattern, which depends on the use of Correlation ID is a well documented Enterprise Integration Pattern.
+## Features
 
- * [The value of a correlation ID](https://blog.rapid7.com/2016/12/23/the-value-of-correlation-ids/)
- * [Identity Correlation on Wikipedia](https://en.wikipedia.org/wiki/Identity_correlation)
+* Adds the Correlation ID to the Request and Response automatically.
+  * Header names can be configured for each separately.
+* Provides a messenger stamp and middleware, that will add the CorrelationIDStamp to each message.
 
 ## Installation
 
@@ -36,6 +36,10 @@ correlation_id:
     request_header_name: 'X-Correlation-ID'
     pass_through: false
 ```
+
+## Messenger Middleware
+
+The messenger middleware will add the Correlation ID to your messages. Just add the middleware to your bus.
 
 ## Copyright & License
 

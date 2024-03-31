@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Phauthentic\CorrelationIdBundle\TestsEventSubscriber;
+namespace Phauthentic\CorrelationIdBundle\Tests\EventSubscriber;
 
 use PHPUnit\Framework\TestCase;
 use Phauthentic\CorrelationIdBundle\EventSubscriber\CorrelationIdSubscriber;
@@ -14,6 +14,9 @@ use Symfony\Component\HttpKernel\Event\RequestEvent;
 use Symfony\Component\HttpKernel\Event\ResponseEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
 
+/**
+ *
+ */
 class CorrelationIdSubscriberTest extends TestCase
 {
     private const CORRELATION_ID = 'd8d089ec-72c8-44c1-a0bf-1906e5fc3524';
