@@ -3,4 +3,5 @@
 /bin/
 /tmp/
 /.phpunit.cache/
+.idea/
 composer.lock
